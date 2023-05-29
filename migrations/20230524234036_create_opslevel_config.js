@@ -4,8 +4,7 @@
  */
 exports.up = function(knex) {
   return knex.schema.createTable('opslevel_config', function (table) {
-    table.increments('id').unsigned().primary();
-    table.string('key').notNullable();
+    table.string('key').primary();
     table.string('value').nullable();
   })
 };

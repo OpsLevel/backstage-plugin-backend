@@ -1,1 +1,1 @@
-export * from './service/opslevel';
+export * from './service/OpsLevelBuilder';
