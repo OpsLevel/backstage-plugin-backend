@@ -34,7 +34,7 @@ export default async function createPlugin(
 
 ### Step 3
 
-Open the `index.ts` file in the `packages/backend/src` subdirectory of your Backstage installation with your code editor of choice.
+Open the `index.ts` file in the `packages/backend/src` subdirectory of your Backstage installation with the code editor of your choice.
 
 #### Step 3.1
 
