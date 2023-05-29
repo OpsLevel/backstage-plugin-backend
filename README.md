@@ -54,7 +54,7 @@ const opslevelEnv = useHotMemoize(module, () => createEnv('opslevel'));
 
 #### Step 3.3
 
-Add the following statement to the cluster of similar statements a bit further down in the `main` function:
+Add the following statement to the cluster of similar statements a bit further down in the `main()` function:
 
 ```ts
 apiRouter.use('/opslevel', await opslevel(opslevelEnv));
