@@ -1,6 +1,6 @@
 
 # OpsLevel Maturity Backend Plugin
-This plugin, in combination with the [frontend plugin](https://github.com/OpsLevel/backstage-plugin), provides automatic
+This plugin, in combination with the [frontend plugin](https://github.com/OpsLevel/backstage-plugin), provides automatic, scheduled
 export functionality of users, groups, and components from Backstage into OpsLevel.
 
 ## Installation
