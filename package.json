@@ -1,5 +1,5 @@
 {
-  "name": "@internal/backstage-plugin-opslevel-backend",
+  "name": "backstage-plugin-opslevel-backend",
   "version": "0.0.1",
   "main": "dist/index.cjs.js",
   "types": "dist/index.d.ts",

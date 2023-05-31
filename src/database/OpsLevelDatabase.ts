@@ -38,7 +38,7 @@ export class OpsLevelDatabase {
     }
     const count: { [key: string]: number | string } | undefined = await this.database('opslevel_export_run').count("id as count").first();
     return {
-      total_count: count?.count,
+      total_count: count === undefined ? 0 : parseInt(count.count.toString(), 10),
       rows: await query.select("*").orderBy("id", "desc")
     }
   }

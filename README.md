@@ -10,7 +10,7 @@ export functionality of users, groups, and components from Backstage into OpsLev
 In the root directory of your Backstage installation, run the following command:
 
 ```bash
-yarn add --cwd packages/app backstage-plugin-opslevel-backend
+yarn add --cwd packages/backend backstage-plugin-opslevel-backend
 ```
 
 ### Step 2
@@ -20,7 +20,7 @@ Create a file called `opslevel.ts` in the `packages/backend/src/plugins` subdire
 ```ts
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
-import { OpsLevelBuilder } from '@internal/backstage-plugin-opslevel-backend';
+import { OpsLevelBuilder } from 'backstage-plugin-opslevel-backend';
 
 export default async function createPlugin(
   env: PluginEnvironment,

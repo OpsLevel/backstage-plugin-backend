@@ -3,18 +3,70 @@ import { OpsLevelDatabase } from "../database/OpsLevelDatabase";
 import { AutoSyncConfiguration } from "../types";
 import { PluginTaskScheduler } from "@backstage/backend-tasks";
 import { CatalogApi } from '@backstage/catalog-client';
-import { OpsLevelGraphqlAPI } from "./OpsLevelGraphqlAPI";
+import { ExportEntityResponse, OpsLevelGraphqlAPI } from "./OpsLevelGraphqlAPI";
 import { Config } from "@backstage/config";
-import { stringifyEntityRef } from "@backstage/catalog-model";
+import { stringifyEntityRef, Entity } from "@backstage/catalog-model";
 import { OpslevelExportRun } from "../database/tables";
 import { AbortController, AbortSignal } from 'node-abort-controller';
 
-export type OpsLevelControllerEnvironment = {
-  logger: Logger;
-  db: OpsLevelDatabase;
-  scheduler: PluginTaskScheduler;
-  catalogClient: CatalogApi;
-};
+const PUSH_EVERY_LINES = 5;
+
+class RunRecordHandler {
+  private runRecord: OpslevelExportRun;
+  private messages: Array<string>;
+  private db: OpsLevelDatabase;
+
+  private constructor(runRecord: OpslevelExportRun, db: OpsLevelDatabase) {
+    this.runRecord = runRecord;
+    this.db = db;
+    this.messages = [];
+  }
+
+  static build(db: OpsLevelDatabase) {
+    return this.prepareRunRecord(db)
+      .then((runRecord) => {
+        return new RunRecordHandler(runRecord, db);
+      });
+  }
+
+  public async message(msg: string) {
+    this.messages.push(RunRecordHandler.ts(msg));
+    const n = this.messages.length;
+    if (n >= PUSH_EVERY_LINES) await this.updateRunRecord();
+  }
+
+  public async setState(state: "running" | "completed" | "failed") {
+    if(state === "completed") this.runRecord.completed_at = new Date();
+    this.runRecord.state = state;
+  }
+
+  public async finalize() {
+    await this.message(`Export to OpsLevel ended with status "${this.runRecord.state}"`);
+    await this.updateRunRecord();
+  }
+
+  private static async prepareRunRecord(db: OpsLevelDatabase): Promise<OpslevelExportRun> {
+    const ret: OpslevelExportRun = {
+      trigger: "scheduled",
+      state: "running",
+      started_at: new Date(),
+      completed_at: null,
+      output: this.ts("Export to OpsLevel has started"),
+    };
+    ret.id = await db.upsertExportRun(ret);
+    return ret;
+  }
+
+  private async updateRunRecord() {
+    if(this.messages.length > 0) this.runRecord.output += `\n${ this.messages.join("\n") }`;
+    this.runRecord.id = await this.db.upsertExportRun(this.runRecord);
+    this.messages = [];
+  }
+
+  private static ts(message: string) {
+    return `${new Date().toUTCString()}: ${message}`;
+  }
+}
 
 export class OpsLevelController {
   private db: OpsLevelDatabase;
@@ -64,7 +116,7 @@ export class OpsLevelController {
       this.running_task_abort_controller = new AbortController();
       this.scheduler.scheduleTask({
         frequency: { cron: auto_sync_schedule },
-        timeout: { days: 1 },
+        timeout: { hours: 2 },
         initialDelay: { seconds: 10 },
         id: "opslevel-exporter",
         fn: async (abortSignal: AbortSignal) => { await this.exportToOpsLevel(abortSignal) },
@@ -78,60 +130,43 @@ export class OpsLevelController {
 
   public async exportToOpsLevel(abortSignal: AbortSignal) {
     this.logger.info("Exporting entities to OpsLevel");
-    const runRecord: OpslevelExportRun = await this.prepareRunRecord();
-    let messagesToPush: Array<string> = [];
+    const recordHandler: RunRecordHandler = await RunRecordHandler.build(this.db);
     try {
       for(const kind of ['user', 'group', 'component']) {
-        const entities = await this.catalog.getEntities({ filter: { kind }});
-        messagesToPush.push(this.ts(`Loaded ${entities.items.length} entities of type ${kind} from Backstage`));
-        for(let i = 0; i < entities.items.length; i++) {
-          const entity = entities.items[i];
-          messagesToPush.push(this.ts(`Exporting ${stringifyEntityRef(entity)}...`));
-          try {
-            await this.opsLevel.exportEntity(entity)
-          } catch (e) {
-            messagesToPush.push(this.ts(`Error: ${e instanceof Error ? e.message : e}`));
-            throw e;
-          }
-          if(abortSignal.aborted) {
-            messagesToPush.push(this.ts("Abort signal received"));
-            throw new Error();
-          }
-          if (i > 0 && i%5 === 0) messagesToPush = await this.updateRunRecord(runRecord, messagesToPush);
-        }
-        messagesToPush = await this.updateRunRecord(runRecord, messagesToPush);
-      };
+        const entities = await this.loadEntities(kind, recordHandler);
+        await this.performEntityExport(entities.items, recordHandler, abortSignal);
+      }
+      await recordHandler.setState("completed");
     } catch (e) {
-      messagesToPush.push(this.ts("Export task failed"));
-      runRecord.state = "failed";
+      await recordHandler.message("Export task failed")
+      await recordHandler.setState("failed");
     }
-    this.logger.info("Entity export to OpsLevel complete");
-    if(runRecord.state !== "failed") { 
-      runRecord.state = "completed";
-      runRecord.completed_at = new Date();
+    await recordHandler.finalize();
+  }
+
+  private async loadEntities(kind: string, recordHandler: RunRecordHandler) {
+    const entities = await this.catalog.getEntities({ filter: { kind }});
+    await recordHandler.message(`Loaded ${entities.items.length} entities of type ${kind} from Backstage`);
+    return entities;
+  }
+
+  private async performEntityExport(entities: Array<Entity>, recordHandler: RunRecordHandler, abortSignal: AbortSignal) {
+    for(const entity of entities) {
+      await recordHandler.message(`Exporting ${stringifyEntityRef(entity)}...`);
+      try {
+        const response: ExportEntityResponse = await this.opsLevel.exportEntity(entity)
+        await recordHandler.message(`Response: ${response.importEntityFromBackstage.actionMessage}`);
+        if (response.importEntityFromBackstage.errors.length) {
+          await recordHandler.message(`Error: ${response.importEntityFromBackstage.errors[0].message}`)
+        }
+      } catch (e) {
+        await recordHandler.message(`Error: ${e instanceof Error ? e.message : e}`);
+        throw e;
+      }
+      if(abortSignal.aborted) {
+        await recordHandler.message("Abort signal received");
+        throw new Error();
+      }
     }
-    await this.updateRunRecord(runRecord, messagesToPush);
-  }
-
-  private async updateRunRecord(runRecord: OpslevelExportRun, messages: Array<string>) {
-    if(messages.length > 0) runRecord.output += `\n${  messages.join("\n")}`;
-    runRecord.id = await this.db.upsertExportRun(runRecord);
-    return [];
-  }
-
-  private ts(message: string) {
-    return `${new Date().toUTCString()}: ${message}`;
-  }
-
-  private async prepareRunRecord(): Promise<OpslevelExportRun> {
-    const ret: OpslevelExportRun = {
-      trigger: "scheduled",
-      state: "running",
-      started_at: new Date(),
-      completed_at: null,
-      output: this.ts("Export to OpsLevel has started"),
-    };
-    ret.id = await this.db.upsertExportRun(ret);
-    return ret;
   }
 }

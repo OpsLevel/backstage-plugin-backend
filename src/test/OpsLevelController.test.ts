@@ -42,6 +42,7 @@ describe('OpsLevelController', () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
+    opsLevelApi.exportEntity.mockReturnValue({ importEntityFromBackstage: { actionMessage: "OK", errors: [] } });
   });
 
   describe('getAutoSyncConfiguration', () => {
@@ -90,7 +91,7 @@ describe('OpsLevelController', () => {
         "initialDelay": {"seconds": 10},
         "scope": "global",
         "signal": undefined,
-        "timeout": {"days": 1}
+        "timeout": {"hours": 2}
       });
     });
   });
@@ -127,7 +128,7 @@ describe('OpsLevelController', () => {
         "initialDelay": {"seconds": 10},
         "scope": "global",
         "signal": undefined,
-        "timeout": {"days": 1}
+        "timeout": {"hours": 2}
       });
     });
 
@@ -158,9 +159,9 @@ describe('OpsLevelController', () => {
 
   describe('exportToOpsLevel', () => {
     it('calls the OpsLevel GraphQL API for each entity when everything goes well', async () => {     
-      const USERS = [ { kind: "user", "name": "User 1" }, { kind: "user", "name": "User 2" } ];
-      const GROUPS = [ { kind: "group", "name": "Group 1" }, { kind: "group", "name": "Group 2" } ];
-      const COMPONENTS = [ { kind: "component", "name": "Component 1" }, { kind: "component", "name": "Component 2" } ];
+      const USERS = [ { kind: "user", metadata: { name: "User 1" } }, { kind: "user", metadata: { name: "User 2" } } ];
+      const GROUPS = [ { kind: "group", metadata: { name: "Group 1" } }, { kind: "group", metadata: { name: "Group 2" } } ];
+      const COMPONENTS = [ { kind: "component", metadata: { name: "Component 1" } }, { kind: "component", metadata: { name: "Component 2" } } ];
 
       db.upsertExportRun.mockReturnValue(Promise.resolve(1));
 
@@ -202,7 +203,7 @@ describe('OpsLevelController', () => {
     });
 
     it('aborts and records that in the log when the signal says so', async () => {
-      const USERS = [ { kind: "user", "name": "User 1" }, { kind: "user", "name": "User 2" } ];
+      const USERS = [ { kind: "user", metadata: { name: "User 1" } }, { kind: "user", metadata: { name: "User 2" } } ];
 
       db.upsertExportRun.mockReturnValue(Promise.resolve(1));
 
@@ -215,7 +216,7 @@ describe('OpsLevelController', () => {
       expect(catalog.getEntities).toHaveBeenCalledTimes(1);
       expect(opsLevelApi.exportEntity).toHaveBeenCalledTimes(1);
 
-      expect(db.upsertExportRun).toHaveBeenCalledTimes(2);
+      expect(db.upsertExportRun).toHaveBeenCalledTimes(3);
       const { trigger, state, completed_at, output } = db.upsertExportRun.mock.calls[1][0];
       expect(trigger).toEqual("scheduled");
       expect(state).toEqual("failed");
@@ -227,7 +228,7 @@ describe('OpsLevelController', () => {
     });
 
     it('records an error if OpsLevel is unreachable', async () => {
-      const USERS = [ { kind: "user", "name": "User 1" }, { kind: "user", "name": "User 2" } ];
+      const USERS = [ { kind: "user", metadata: { name: "User 1" } }, { kind: "user", metadata: { name: "User 2" } } ];
 
       db.upsertExportRun.mockReturnValue(Promise.resolve(1));
 
@@ -240,7 +241,7 @@ describe('OpsLevelController', () => {
       expect(catalog.getEntities).toHaveBeenCalledTimes(1);
       expect(opsLevelApi.exportEntity).toHaveBeenCalledTimes(1);
 
-      expect(db.upsertExportRun).toHaveBeenCalledTimes(2);
+      expect(db.upsertExportRun).toHaveBeenCalledTimes(3);
       const { trigger, state, completed_at, output } = db.upsertExportRun.mock.calls[1][0];
       expect(trigger).toEqual("scheduled");
       expect(state).toEqual("failed");

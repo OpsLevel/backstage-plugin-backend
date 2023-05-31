@@ -13,15 +13,22 @@ mutation importEntityFromBackstage($entityRef: String!, $entity: JSON!) {
 }
 `;
 
+export type ExportEntityResponse = {
+  importEntityFromBackstage: {
+    errors: Array<{ message: string }>,
+    actionMessage: string,
+  }
+}
+
 export class OpsLevelGraphqlAPI {
   private client: GraphQLClient;
 
   constructor(backendUrl: string, client: GraphQLClient | null = null) {
-    this.client = client || new GraphQLClient(`${backendUrl}/api/proxy/opslevel/graphql`);
+    this.client = client || new GraphQLClient(`${backendUrl}/api/proxy/opslevel/graphql`, { headers: { "GraphQL-Visibility": "internal" } });
   }
 
-  public exportEntity(entity: Entity) {
+  public async exportEntity(entity: Entity): Promise<ExportEntityResponse> {
     const entityRef = stringifyEntityRef(entity);
-    return this.client.request(IMPORT_ENTITY_QUERY, { entityRef, entity });
+    return (this.client.request(IMPORT_ENTITY_QUERY, { entityRef, entity }) as Promise<ExportEntityResponse>);
   }
 }
