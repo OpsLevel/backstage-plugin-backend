@@ -73,3 +73,7 @@ proxy:
       Authorization: Bearer <your_OpsLevel_API_token>
     allowedHeaders: ['GraphQL-Visibility']
 ```
+
+### Maturity of this Plugin
+
+[![Overall](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fapp.opslevel.com%2Fapi%2Fservice_level%2FL6pkRwdgleo4ZoLC4IaR0LaNwaesYvv7LP70yg-qpwI)](https://app.opslevel.com/services/backstage-plugin-backend/maturity-report)
