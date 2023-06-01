@@ -131,7 +131,7 @@ export class OpsLevelController {
     this.logger.info("Exporting entities to OpsLevel");
     const recordHandler: RunRecordHandler = await RunRecordHandler.build(this.db);
     try {
-      for(const kind of ['group']) {
+      for(const kind of ['user', 'group', 'component']) {
         const entities = await this.loadEntities(kind, recordHandler);
         await this.performEntityExport(entities.items, recordHandler, abortSignal);
       }
