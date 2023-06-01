@@ -7,7 +7,6 @@ import { ExportEntityResponse, OpsLevelGraphqlAPI } from "./OpsLevelGraphqlAPI";
 import { Config } from "@backstage/config";
 import { stringifyEntityRef, Entity } from "@backstage/catalog-model";
 import { OpslevelExportRun } from "../database/tables";
-import { AbortController } from 'node-abort-controller';
 
 const PUSH_EVERY_LINES = 5;
 
@@ -119,8 +118,8 @@ export class OpsLevelController {
         timeout: { hours: 2 },
         initialDelay: { seconds: 10 },
         id: "opslevel-exporter",
-        fn: async (abortSignal: any) => { await this.exportToOpsLevel(abortSignal) },
-        signal: (this.running_task_abort_controller.signal as any),
+        fn: async (abortSignal: AbortSignal) => { await this.exportToOpsLevel(abortSignal) },
+        signal: this.running_task_abort_controller.signal,
         scope: 'global',
       });
     } else {
@@ -132,7 +131,7 @@ export class OpsLevelController {
     this.logger.info("Exporting entities to OpsLevel");
     const recordHandler: RunRecordHandler = await RunRecordHandler.build(this.db);
     try {
-      for(const kind of ['user', 'group', 'component']) {
+      for(const kind of ['group']) {
         const entities = await this.loadEntities(kind, recordHandler);
         await this.performEntityExport(entities.items, recordHandler, abortSignal);
       }
