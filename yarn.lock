@@ -2065,62 +2065,6 @@
     winston "^3.2.1"
     winston-transport "^4.5.0"
 
-"@backstage/backend-common@^0.15.2":
-  version "0.15.2"
-  resolved "https://registry.yarnpkg.com/@backstage/backend-common/-/backend-common-0.15.2.tgz#cfe3968bd88191051ade221b8f0c26763b5be5a3"
-  integrity sha512-vai5DaMIuEUGcqEIZVoGAgtc3kaRo84qD3ao1nOOsL0G05wuuE4BYl9Ip3nPpHKXgUgcS5uRR1qMyIu3jTN7nQ==
-  dependencies:
-    "@backstage/cli-common" "^0.1.10"
-    "@backstage/config" "^1.0.3"
-    "@backstage/config-loader" "^1.1.5"
-    "@backstage/errors" "^1.1.2"
-    "@backstage/integration" "^1.3.2"
-    "@backstage/types" "^1.0.0"
-    "@google-cloud/storage" "^6.0.0"
-    "@keyv/redis" "^2.2.3"
-    "@kubernetes/client-node" "^0.17.0"
-    "@manypkg/get-packages" "^1.1.3"
-    "@octokit/rest" "^19.0.3"
-    "@types/cors" "^2.8.6"
-    "@types/dockerode" "^3.3.0"
-    "@types/express" "^4.17.6"
-    "@types/luxon" "^3.0.0"
-    "@types/webpack-env" "^1.15.2"
-    archiver "^5.0.2"
-    aws-sdk "^2.840.0"
-    base64-stream "^1.0.0"
-    compression "^1.7.4"
-    concat-stream "^2.0.0"
-    cors "^2.8.5"
-    dockerode "^3.3.1"
-    express "^4.17.1"
-    express-promise-router "^4.1.0"
-    fs-extra "10.1.0"
-    git-url-parse "^13.0.0"
-    helmet "^6.0.0"
-    isomorphic-git "^1.8.0"
-    jose "^4.6.0"
-    keyv "^4.0.3"
-    keyv-memcache "^1.2.5"
-    knex "^2.0.0"
-    lodash "^4.17.21"
-    logform "^2.3.2"
-    luxon "^3.0.0"
-    minimatch "^5.0.0"
-    minimist "^1.2.5"
-    morgan "^1.10.0"
-    node-abort-controller "^3.0.1"
-    node-fetch "^2.6.7"
-    raw-body "^2.4.1"
-    request "^2.88.2"
-    selfsigned "^2.0.0"
-    stoppable "^1.1.0"
-    tar "^6.1.2"
-    uuid "^8.3.2"
-    winston "^3.2.1"
-    yauzl "^2.10.0"
-    yn "^4.0.0"
-
 "@backstage/backend-common@^0.16.0":
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/@backstage/backend-common/-/backend-common-0.16.0.tgz#cc26f26741a7ff208df28074d8e9395da2e87e09"
@@ -2481,7 +2425,7 @@
     "@backstage/config" "^1.0.7"
     "@backstage/errors" "^1.1.5"
 
-"@backstage/integration@^1.3.2", "@backstage/integration@^1.4.0", "@backstage/integration@^1.4.5":
+"@backstage/integration@^1.4.0", "@backstage/integration@^1.4.5":
   version "1.4.5"
   resolved "https://registry.yarnpkg.com/@backstage/integration/-/integration-1.4.5.tgz#c38f025d541ed371c4fbf3810e8f1305a6ab12fa"
   integrity sha512-G7WUGMhrzyGpIey0EF4i6oTVSxHqhEUYsszVq6l87zosQRJYZtRe8c2FKy1WfO43d4L/F9L/ncaYwImLg2jk3w==
@@ -3095,7 +3039,7 @@
     json-buffer "^3.0.1"
     memjs "^1.3.1"
 
-"@keyv/redis@^2.2.3", "@keyv/redis@^2.5.3":
+"@keyv/redis@^2.5.3":
   version "2.5.8"
   resolved "https://registry.yarnpkg.com/@keyv/redis/-/redis-2.5.8.tgz#6ba503b215f8ea66d194aa99457161e18ec046ec"
   integrity sha512-WweuUZqZN2ETcseV6r1AEum1qG6eR5poNhkZ4CIpWBOjMasT2ArTKWyIPxxYllKUS2A8wKv1l8+AqH6Jpzk7Ug==
@@ -3153,28 +3097,6 @@
     ws "^8.11.0"
   optionalDependencies:
     openid-client "^5.3.0"
-
-"@kubernetes/client-node@^0.17.0":
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/@kubernetes/client-node/-/client-node-0.17.1.tgz#a5740712848d77823e7d0eee70229936398b4142"
-  integrity sha512-qXANjukuTq/drb1hq1NCYZafpdRTvbyTzbliWO6RwW7eEb2b9qwINbw0DiVHpBQg3e9DeQd8+brI1sR1Fck5kQ==
-  dependencies:
-    byline "^5.0.0"
-    execa "5.0.0"
-    isomorphic-ws "^4.0.1"
-    js-yaml "^4.1.0"
-    jsonpath-plus "^0.19.0"
-    request "^2.88.0"
-    rfc4648 "^1.3.0"
-    shelljs "^0.8.5"
-    stream-buffers "^3.0.2"
-    tar "^6.1.11"
-    tmp-promise "^3.0.2"
-    tslib "^1.9.3"
-    underscore "^1.9.1"
-    ws "^7.3.1"
-  optionalDependencies:
-    openid-client "^5.1.6"
 
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.4"
@@ -9409,15 +9331,7 @@ jws@^4.0.0:
     jwa "^2.0.0"
     safe-buffer "^5.0.1"
 
-keyv-memcache@^1.2.5:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/keyv-memcache/-/keyv-memcache-1.3.3.tgz#07343ae4e4cc1373ecca83657c246c616f9b0b7d"
-  integrity sha512-7k+0Ju2KPkS+a22MdgUW/MPAYyo736joxfrWFUsgiUY7ssu/tT6hxfWjxubQBNeG93dHRTBAF0oFUtSSVYTW0Q==
-  dependencies:
-    json-buffer "^3.0.1"
-    memjs "^1.3.0"
-
-keyv@^4.0.3, keyv@^4.5.2:
+keyv@^4.5.2:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.5.2.tgz#0e310ce73bf7851ec702f2eaf46ec4e3805cce56"
   integrity sha512-5MHbFaKn8cNSmVW7BYnijeAVlE4cYA/SVkifVgrh7yotnfhKmjuXpDKjrABLnT0SfHWV21P8ow07OGfRrNDg8g==
@@ -9771,7 +9685,7 @@ memfs@^3.1.2, memfs@^3.4.1, memfs@^3.4.3:
   dependencies:
     fs-monkey "^1.0.3"
 
-memjs@^1.3.0, memjs@^1.3.1:
+memjs@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/memjs/-/memjs-1.3.1.tgz#88a6290810e8d406cf923645587d82cc06890c66"
   integrity sha512-yaCfHqmws1dP12uAhmD5jb+k0IM/9d//vidLoSyooxb9Rhaa5+cN+WEMwOg+CU1tH9epGiso/VsOXwchAHfvqw==
