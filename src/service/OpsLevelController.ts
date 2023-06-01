@@ -7,7 +7,7 @@ import { ExportEntityResponse, OpsLevelGraphqlAPI } from "./OpsLevelGraphqlAPI";
 import { Config } from "@backstage/config";
 import { stringifyEntityRef, Entity } from "@backstage/catalog-model";
 import { OpslevelExportRun } from "../database/tables";
-import { AbortController, AbortSignal } from 'node-abort-controller';
+import { AbortController } from 'node-abort-controller';
 
 const PUSH_EVERY_LINES = 5;
 
@@ -119,8 +119,8 @@ export class OpsLevelController {
         timeout: { hours: 2 },
         initialDelay: { seconds: 10 },
         id: "opslevel-exporter",
-        fn: async (abortSignal: AbortSignal) => { await this.exportToOpsLevel(abortSignal) },
-        signal: this.running_task_abort_controller.signal,
+        fn: async (abortSignal: any) => { await this.exportToOpsLevel(abortSignal) },
+        signal: (this.running_task_abort_controller.signal as any),
         scope: 'global',
       });
     } else {
