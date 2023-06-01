@@ -9,6 +9,10 @@
     "main": "dist/index.cjs.js",
     "types": "dist/index.d.ts"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpsLevel/backstage-plugin-backend"
+  },
   "backstage": {
     "role": "backend-plugin"
   },
@@ -52,5 +56,11 @@
   "files": [
     "dist",
     "/migrations/*"
+  ],
+  "keywords": [
+    "backstage",
+    "service maturity",
+    "service quality",
+    "maturity score"
   ]
 }
