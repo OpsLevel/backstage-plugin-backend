@@ -7,7 +7,6 @@ import { ExportEntityResponse, OpsLevelGraphqlAPI } from "./OpsLevelGraphqlAPI";
 import { Config } from "@backstage/config";
 import { stringifyEntityRef, Entity } from "@backstage/catalog-model";
 import { OpslevelExportRun } from "../database/tables";
-import { AbortController, AbortSignal } from 'node-abort-controller';
 
 const PUSH_EVERY_LINES = 5;
 
