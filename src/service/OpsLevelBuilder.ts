@@ -5,7 +5,8 @@ import { PluginTaskScheduler } from '@backstage/backend-tasks';
 import { applyDatabaseMigrations } from "../database/migrations";
 import { OpsLevelDatabase } from "../database/OpsLevelDatabase";
 import { OpsLevelController } from "./OpsLevelController";
-import { CatalogApi, CatalogClient } from "@backstage/catalog-client";
+import { CatalogClient } from "@backstage/catalog-client";
+import { IdentityApi } from '@backstage/plugin-auth-node';
 import { Config } from "@backstage/config";
 
 
@@ -13,9 +14,8 @@ export type OpsLevelEnvironment = {
   logger: Logger;
   database: PluginDatabaseManager;
   scheduler: PluginTaskScheduler;
-  catalog: CatalogApi;
   discovery: PluginEndpointDiscovery;
-  identity: any; // todo
+  identity: IdentityApi;
   config: Config;
 };
 
@@ -37,8 +37,7 @@ export class OpsLevelBuilder {
 
   async build() {
     const { database, logger, scheduler, identity, discovery, config } = this.env;
-    let { catalog } = this.env;
-    catalog = catalog || new CatalogClient({ discoveryApi: discovery });
+    const catalog = new CatalogClient({ discoveryApi: discovery });
     
     const dbClient = await database.getClient();
 

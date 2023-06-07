@@ -51,7 +51,7 @@ describe('createRouter', () => {
   describe('POST /auto_sync', () => {
     it('calls the controller with the new params and returns OK', async () => {
       const VALID_EXPRESSIONS = [
-        "* * * * *",
+        "0 * * * *",
         "0 0 12 * * *",
         "0 10/30 1,22 * *",
       ];
@@ -83,6 +83,7 @@ describe('createRouter', () => {
         "0 2 * * * 0 0",
         "12 34",
         "every day at 5am pls",
+        "* * * * *",
       ];
 
       for(const expression of INVALID_EXPRESSIONS) {
@@ -91,7 +92,7 @@ describe('createRouter', () => {
 
         expect(controller.setAutoSyncConfiguration).not.toHaveBeenCalled();
         expect(response.status).toEqual(400);
-        expect(response.body).toEqual({ "error": "Invalid cron expression" });
+        expect(response.body).toEqual({ "error": expression === "* * * * *" ? "Can run at most once per hour" : "Invalid cron expression" });
       }
     });
   });
