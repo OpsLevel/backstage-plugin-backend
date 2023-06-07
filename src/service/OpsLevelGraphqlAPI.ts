@@ -37,7 +37,7 @@ export class OpsLevelGraphqlAPI {
 
   public async exportEntity(entity: Entity): Promise<ExportEntityResponse> {
     const entityRef = stringifyEntityRef(entity);
-    return (this.request(IMPORT_ENTITY_QUERY, { entityRef, entity }) as Promise<ExportEntityResponse>);
+    return this.request<ExportEntityResponse>(IMPORT_ENTITY_QUERY, { entityRef, entity });
   }
 
   private async request<T>(query: string, args: any, retries=3): Promise<T> {
