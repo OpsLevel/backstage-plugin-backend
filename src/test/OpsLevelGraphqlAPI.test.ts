@@ -43,9 +43,9 @@ describe('OpsLevelGraphqlAPI', () => {
 
       const mockedTimeout = setTimeout as jest.MockedFunction<typeof setTimeout>;
       expect(mockedTimeout).toHaveBeenCalledTimes(3);
-      expect(mockedTimeout.mock.calls[0][1]).toEqual(10000);
-      expect(mockedTimeout.mock.calls[1][1]).toEqual(20000);
-      expect(mockedTimeout.mock.calls[2][1]).toEqual(30000);
+      expect(mockedTimeout.mock.calls[0][1]).toEqual(20000);
+      expect(mockedTimeout.mock.calls[1][1]).toEqual(40000);
+      expect(mockedTimeout.mock.calls[2][1]).toEqual(60000);
 
       expect(client.request).toHaveBeenCalledTimes(4);
       for(let i = 1; i <= 4; i++) {
@@ -64,9 +64,9 @@ describe('OpsLevelGraphqlAPI', () => {
 
       const mockedTimeout = setTimeout as jest.MockedFunction<typeof setTimeout>;
       expect(mockedTimeout).toHaveBeenCalledTimes(3);
-      expect(mockedTimeout.mock.calls[0][1]).toEqual(10000);
-      expect(mockedTimeout.mock.calls[1][1]).toEqual(20000);
-      expect(mockedTimeout.mock.calls[2][1]).toEqual(30000);
+      expect(mockedTimeout.mock.calls[0][1]).toEqual(20000);
+      expect(mockedTimeout.mock.calls[1][1]).toEqual(40000);
+      expect(mockedTimeout.mock.calls[2][1]).toEqual(60000);
 
       expect(client.request).toHaveBeenCalledTimes(4);
       for(let i = 1; i <= 4; i++) {

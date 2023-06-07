@@ -5,7 +5,7 @@ import { RateLimiter } from 'limiter';
 
 // API Token Request Limit: No more than 250 API requests per minute per API token
 // https://docs.opslevel.com/docs/graphql#what-is-the-api-rate-limit
-const MAX_RPM = 249;
+const MAX_RPM = 200;
 
 export const IMPORT_ENTITY_QUERY = gql`
 mutation importEntityFromBackstage($entityRef: String!, $entity: JSON!) {
@@ -46,7 +46,7 @@ export class OpsLevelGraphqlAPI {
       return await this.client.request<T>(query, args);
     } catch (error) {
       if(error instanceof ClientError && error.response?.status === 429 && retries > 0) {
-        await new Promise(r => setTimeout(r, (3-retries+1) * 10000));
+        await new Promise(r => setTimeout(r, (3-retries+1) * 20000));
         return this.request(query, args, retries-1);
       }
       throw error;
