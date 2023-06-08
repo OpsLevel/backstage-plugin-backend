@@ -40,6 +40,7 @@ export async function createRouter(
     if (auto_sync_schedule && typeof(auto_sync_enabled) === 'boolean' && typeof(auto_sync_schedule) === 'string') {
       // This is what Backstage uses internally:
       try { new CronTime(auto_sync_schedule) } catch (e) { throw new Error("Invalid cron expression"); }
+      if (!auto_sync_schedule.startsWith("0 ")) throw new Error("Can run at most once per hour")
       await controller.setAutoSyncConfiguration(request.body);
       return response.json({"status": "ok"});
     }

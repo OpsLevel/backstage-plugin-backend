@@ -40,6 +40,7 @@
     "express-promise-router": "^4.1.0",
     "graphql-request": "^6.1.0",
     "knex": "^2.4.2",
+    "limiter": "^2.1.0",
     "node-fetch": "^3.3.1",
     "winston": "^3.9.0",
     "yn": "^4.0.0"
