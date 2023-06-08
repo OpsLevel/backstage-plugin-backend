@@ -59,7 +59,7 @@ describe('OpsLevelController', () => {
     it('returns the default if there is no configuration in the DB', async () => {
       const response = await controller.getAutoSyncConfiguration();
 
-      expect(response).toEqual({ "auto_sync_enabled": false, "auto_sync_schedule": "" });
+      expect(response).toEqual({ "auto_sync_enabled": false, "auto_sync_schedule": "0 * * * *" });
     });
   });
 

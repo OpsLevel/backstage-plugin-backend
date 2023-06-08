@@ -86,7 +86,7 @@ export class OpsLevelController {
   public async getAutoSyncConfiguration() {
     return {
       "auto_sync_enabled": (await this.db.fetchConfigValue("auto_sync_enabled") === "true"),
-      "auto_sync_schedule": await this.db.fetchConfigValue("auto_sync_schedule") || "",
+      "auto_sync_schedule": await this.db.fetchConfigValue("auto_sync_schedule") || "0 * * * *",
     }
   }
 
