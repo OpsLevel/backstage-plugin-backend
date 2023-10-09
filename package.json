@@ -35,7 +35,7 @@
     "@backstage/plugin-auth-node": "^0.2.14",
     "@types/cron": "^2.0.1",
     "@types/express": "*",
-    "cron": "^2.3.1",
+    "cron": "^3.0.0",
     "express": "^4.17.3",
     "express-promise-router": "^4.1.0",
     "graphql-request": "^6.1.0",
