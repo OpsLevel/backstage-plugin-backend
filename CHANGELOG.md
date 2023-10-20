@@ -4,6 +4,12 @@
 
   * Nothing yet
 
+## [1.0.5] - 2023-10-20
+
+### Changed
+
+  * Bugfix with compiled assets
+
 ## [1.0.4] - 2023-10-12
 
 ### Added
