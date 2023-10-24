@@ -1,5 +1,5 @@
 [![Overall](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fapp.opslevel.com%2Fapi%2Fservice_level%2FL6pkRwdgleo4ZoLC4IaR0LaNwaesYvv7LP70yg-qpwI)](https://app.opslevel.com/services/backstage-plugin-backend/maturity-report)
-[![npm](https://img.shields.io/npm/v/backstage-plugin-opslevel-backend)](https://www.npmjs.com/package/backstage-plugin-opslevel-backend)
+[![npm](https://img.shields.io/npm/v/@opslevel/backstage-maturity-backend)](https://www.npmjs.com/package/@opslevel/backstage-maturity-backend)
 
 # OpsLevel Maturity Backend Plugin
 This plugin, in combination with the [frontend plugin](https://github.com/OpsLevel/backstage-plugin), provides automatic, scheduled
@@ -12,7 +12,7 @@ export functionality of users, groups, and components from Backstage into OpsLev
 In the root directory of your Backstage installation, run the following command:
 
 ```bash
-yarn add --cwd packages/backend backstage-plugin-opslevel-backend
+yarn add --cwd packages/backend @opslevel/backstage-maturity-backend
 ```
 
 ### Step 2
@@ -22,7 +22,7 @@ Create a file called `opslevel.ts` in the `packages/backend/src/plugins` subdire
 ```ts
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
-import { OpsLevelBuilder } from 'backstage-plugin-opslevel-backend';
+import { OpsLevelBuilder } from '@opslevel/backstage-maturity-backend';
 
 export default async function createPlugin(
   env: PluginEnvironment,
