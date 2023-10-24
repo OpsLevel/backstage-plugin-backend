@@ -4,6 +4,13 @@
 
   * Nothing yet
 
+## [1.0.6] - 2023-10-24
+
+### Changed
+
+  * Deprecates `backstage-plugin-opslevel-backend` in favor of the scoped package
+  * Releases `@opslevel/backstage-maturity-backend`
+
 ## [1.0.5] - 2023-10-20
 
 ### Changed
