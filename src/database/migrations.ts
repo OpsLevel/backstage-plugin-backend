@@ -3,7 +3,7 @@ import { Knex } from 'knex';
 
 export async function applyDatabaseMigrations(knex: Knex): Promise<void> {
   const migrationsDir = resolvePackagePath(
-    'backstage-plugin-opslevel-backend',
+    '@opslevel/backstage-maturity-backend',
     'migrations',
   );
 
