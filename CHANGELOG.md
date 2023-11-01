@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-  * Nothing yet
+  * Updates package description text
 
 ## [1.0.6] - 2023-10-24
 
