@@ -1,5 +1,6 @@
 {
   "name": "@opslevel/backstage-maturity-backend",
+  "description": "The official OpsLevel back-end Backstage plugin for fetching catalog and service maturity details.",
   "version": "1.0.6",
   "main": "dist/index.cjs.js",
   "types": "dist/index.d.ts",
