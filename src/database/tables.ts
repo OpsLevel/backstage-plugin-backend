@@ -10,4 +10,4 @@ export type OpslevelExportRun = {
   started_at: Date;
   completed_at: Date | null;
   output: string;
-}
+};
