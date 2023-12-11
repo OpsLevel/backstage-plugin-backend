@@ -50,7 +50,7 @@
   "devDependencies": {
     "@backstage/cli": "^0.24.0",
     "@types/supertest": "^2.0.16",
-    "better-sqlite3": "^8.4.0",
+    "better-sqlite3": "^9.2.2",
     "changie": "^1.16.0",
     "msw": "^1.3.2",
     "supertest": "^6.2.4",
