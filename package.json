@@ -48,7 +48,7 @@
     "yn": "^5.0.0"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.24.0",
+    "@backstage/cli": "^0.25.2",
     "@types/supertest": "^6.0.2",
     "better-sqlite3": "^9.3.0",
     "changie": "^1.16.0",
