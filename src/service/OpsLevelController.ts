@@ -137,6 +137,8 @@ export class OpsLevelController {
       }
       await recordHandler.setState("completed");
     } catch (e) {
+      this.logger.error(e);
+      await recordHandler.message(`Error: ${e instanceof Error ? e.message : e}`);
       await recordHandler.message("Export task failed")
       await recordHandler.setState("failed");
     }
