@@ -1,0 +1,3 @@
+kind: Breaking
+body: Upgraded minor version of several Backstage dependencies (which are 0.x.y)
+time: 2024-03-15T11:42:24.975071-04:00

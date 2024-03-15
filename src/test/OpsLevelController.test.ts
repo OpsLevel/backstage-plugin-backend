@@ -251,5 +251,23 @@ describe('OpsLevelController', () => {
       expect(output).not.toContain("Exporting user:default/user 2...");
       expect(output).toContain("Error: Could not connect!");
     });
+
+    it('records an error if we are unable to load the entities', async () => {
+      db.upsertExportRun.mockReturnValue(Promise.resolve(1));
+
+      catalog.getEntities.mockRejectedValue(new Error('You must not load entities!'));
+
+      await controller.exportToOpsLevel(new AbortController().signal);
+
+      expect(catalog.getEntities).toHaveBeenCalledTimes(1);
+      expect(opsLevelApi.exportEntity).not.toHaveBeenCalled();
+
+      expect(db.upsertExportRun).toHaveBeenCalledTimes(2);
+      const { trigger, state, completed_at, output } = db.upsertExportRun.mock.calls[1][0];
+      expect(trigger).toEqual("scheduled");
+      expect(state).toEqual("failed");
+      expect(completed_at).toBe(null);
+      expect(output).toContain("Error: You must not load entities!");
+    });
   });
 });
