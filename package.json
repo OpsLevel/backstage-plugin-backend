@@ -53,7 +53,7 @@
     "@types/supertest": "^6.0.2",
     "better-sqlite3": "^9.3.0",
     "changie": "^1.16.0",
-    "supertest": "^6.2.4",
+    "supertest": "^7.0.0",
     "yalc": "^1.0.0-pre.53"
   },
   "files": [
