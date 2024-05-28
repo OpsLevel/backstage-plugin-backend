@@ -28,7 +28,7 @@
     "bump-version": "changie batch auto && changie merge"
   },
   "dependencies": {
-    "@backstage/backend-common": "^0.21.3",
+    "@backstage/backend-common": "^0.22.0",
     "@backstage/backend-plugin-api": "^0.6.7",
     "@backstage/backend-tasks": "^0.5.12",
     "@backstage/catalog-client": "^1.4.6",
