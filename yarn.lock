@@ -2621,30 +2621,7 @@
     lodash "^4.17.21"
     luxon "^3.0.0"
 
-"@backstage/plugin-auth-node@^0.4.1", "@backstage/plugin-auth-node@^0.4.13":
-  version "0.4.13"
-  resolved "https://registry.yarnpkg.com/@backstage/plugin-auth-node/-/plugin-auth-node-0.4.13.tgz#df54d69b0f6cbce91526937cfb21a7c732630787"
-  integrity sha512-i+41bNGQGY8JWFq/9GO08mylaAlSTn4vxiVpj3BYG1BZdtqpHT45MqpnVZ3s1i+/49gLoAo+PquLks9WNvmU0A==
-  dependencies:
-    "@backstage/backend-common" "^0.22.0"
-    "@backstage/backend-plugin-api" "^0.6.18"
-    "@backstage/catalog-client" "^1.6.5"
-    "@backstage/catalog-model" "^1.5.0"
-    "@backstage/config" "^1.2.0"
-    "@backstage/errors" "^1.2.4"
-    "@backstage/types" "^1.1.1"
-    "@types/express" "*"
-    "@types/passport" "^1.0.3"
-    express "^4.17.1"
-    jose "^5.0.0"
-    lodash "^4.17.21"
-    node-fetch "^2.6.7"
-    passport "^0.7.0"
-    winston "^3.2.1"
-    zod "^3.22.4"
-    zod-to-json-schema "^3.21.4"
-
-"@backstage/plugin-auth-node@^0.4.15":
+"@backstage/plugin-auth-node@^0.4.1", "@backstage/plugin-auth-node@^0.4.13", "@backstage/plugin-auth-node@^0.4.15":
   version "0.4.15"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-auth-node/-/plugin-auth-node-0.4.15.tgz#4e7ff16edeea27dd494f99d248f7e2b0f6104736"
   integrity sha512-rcplXvoxPtTbHkjIVmANiHcSLE71LFEZHM3No9PLfvp65Ox8WIWB4byHD89G/rHzJr+n277rC8Yv9/lqiL9cUA==
