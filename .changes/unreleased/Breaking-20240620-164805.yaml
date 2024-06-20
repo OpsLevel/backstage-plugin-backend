@@ -1,0 +1,4 @@
+kind: Breaking
+body: Switches to use @backstage/backend-plugin-api version of resolving path in preparation
+  of New Backend Release
+time: 2024-06-20T16:48:05.107248-05:00
