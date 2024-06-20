@@ -2208,7 +2208,7 @@
   resolved "https://registry.yarnpkg.com/@backstage/backend-dev-utils/-/backend-dev-utils-0.1.4.tgz#65d204939c49b5df6a2148e8ad4dc718ccd1df07"
   integrity sha512-5YgAPz4CRtnqdaUlYCHwGmXvpkGQ1jaUMoDtiQ81WDxQrf+0iYZCwS4ftVyQmB0Ga6BaGOUf6GG/OuFA56Y5mA==
 
-"@backstage/backend-plugin-api@^0.6.20", "@backstage/backend-plugin-api@^0.6.7":
+"@backstage/backend-plugin-api@^0.6.20":
   version "0.6.20"
   resolved "https://registry.yarnpkg.com/@backstage/backend-plugin-api/-/backend-plugin-api-0.6.20.tgz#61eedd027bc9342cde243393746f3abdebc30eea"
   integrity sha512-nZhnyvKBhn8HKEWV+cbV4mKg4Q2bFwtc0euRkx/qKrhDOAbIBGqADAep1v9LYqCIHq3KuaPaFY0E4if7kwlrhA==
@@ -2264,12 +2264,12 @@
     ajv "^8.10.0"
     lodash "^4.17.21"
 
-"@backstage/cli-common@^0.1.13", "@backstage/cli-common@^0.1.14":
+"@backstage/cli-common@^0.1.14":
   version "0.1.14"
   resolved "https://registry.yarnpkg.com/@backstage/cli-common/-/cli-common-0.1.14.tgz#2291520acfbac860a05dd48fc3b876d5cd789b76"
   integrity sha512-4kGWGrFuxoaCne2aHCOVW+vi8y2MLEMEj785SEApMG2J8jXJXUuIOzWw0MrN0pM1FqBXDb6aeQd+bmQMK/Ci+w==
 
-"@backstage/cli-node@^0.2.5", "@backstage/cli-node@^0.2.6":
+"@backstage/cli-node@^0.2.6":
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/@backstage/cli-node/-/cli-node-0.2.6.tgz#307f29eeb70943c6f6b1e8ee7a1da418c7809bf8"
   integrity sha512-X9i2tXbwhLMGnOqgCc0O7CO9/lPjiQsPv/a0rv9cRstCqGHUwB0rrCFDVXf3kMRVYitgmJHxIE1L7N/Yg+TH+w==
@@ -2400,7 +2400,7 @@
     yn "^4.0.0"
     zod "^3.22.4"
 
-"@backstage/config-loader@^1.8.0", "@backstage/config-loader@^1.8.1":
+"@backstage/config-loader@^1.8.1":
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/@backstage/config-loader/-/config-loader-1.8.1.tgz#4383309ffe0488fa6c9dac33f3bec96181750e42"
   integrity sha512-oPT+TZK1ppBjQXgOJ+pfsfE/Lov596WlBc5po9wElgnbQ720OsyAmystLKecvZ1HAjC/IGLKrPZMh9OAy/k36Q==
@@ -2459,7 +2459,7 @@
     "@backstage/config" "^1.2.0"
     "@backstage/errors" "^1.2.4"
 
-"@backstage/integration@^1.11.0", "@backstage/integration@^1.12.0":
+"@backstage/integration@^1.12.0":
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/@backstage/integration/-/integration-1.12.0.tgz#3e65aae7984dfc85de5a42140b8a581d76656459"
   integrity sha512-4MpRYuV+IkzZ+BzMIkmtxR1YyhidIq7+JccqXXhorI8BoAQLUmTZqlryTh9uiWIwY4u/GrIUIvZ81fPVxALjCQ==
