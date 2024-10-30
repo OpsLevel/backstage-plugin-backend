@@ -6781,12 +6781,12 @@ cron-parser@^4.2.0:
     luxon "^3.2.1"
 
 cron@*, cron@^3.0.0, cron@^3.1.6:
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/cron/-/cron-3.1.7.tgz#3423d618ba625e78458fff8cb67001672d49ba0d"
-  integrity sha512-tlBg7ARsAMQLzgwqVxy8AZl/qlTc5nibqYwtNGoCrd+cV+ugI+tvZC1oT/8dFH8W455YrywGykx/KMmAqOr7Jw==
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/cron/-/cron-3.1.8.tgz#0def028942596ee528879a1251e1c612b9afc22b"
+  integrity sha512-45bqmAOSd/XB5JJWfV1W59fFEzqgNNWmOYQZVcw0sfyQqU35HFdVfTsr2xzlqWoTAfspRrvK0lSSLj8Pj9YmpQ==
   dependencies:
     "@types/luxon" "~3.4.0"
-    luxon "~3.4.0"
+    luxon "~3.5.0"
 
 cross-fetch@^3.1.5:
   version "3.1.8"
@@ -10820,10 +10820,10 @@ lru-cache@^9.0.0:
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-9.1.2.tgz#255fdbc14b75589d6d0e73644ca167a8db506835"
   integrity sha512-ERJq3FOzJTxBbFjZ7iDs+NiK4VI9Wz+RdrrAB8dio1oV+YvdPzUEE4QNiT2VD51DkIbCYRUUzCRkssXCHqSnKQ==
 
-luxon@^3.0.0, luxon@^3.2.1, luxon@~3.4.0:
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.4.4.tgz#cf20dc27dc532ba41a169c43fdcc0063601577af"
-  integrity sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA==
+luxon@^3.0.0, luxon@^3.2.1, luxon@~3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.5.0.tgz#6b6f65c5cd1d61d1fd19dbf07ee87a50bf4b8e20"
+  integrity sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==
 
 magic-string@^0.30.3, magic-string@^0.30.4:
   version "0.30.8"
