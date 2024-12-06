@@ -43,7 +43,7 @@ Open the `index.ts` file in the `packages/backend/src` subdirectory of your Back
 Add the following line after the end of the existing import statements:
 
 ```ts
-import opslevel from './plugins/opslevel';
+import { legacyPlugin } from '@backstage/backend-common';
 ```
 
 #### Step 3.2
@@ -51,15 +51,8 @@ import opslevel from './plugins/opslevel';
 Add the following statement to the cluster of similar statements near the top of the `main()` function:
 
 ```ts
-const opslevelEnv = useHotMemoize(module, () => createEnv('opslevel'));
-```
-
-#### Step 3.3
-
-Add the following statement to the cluster of similar statements a bit further down in the `main()` function:
-
-```ts
-apiRouter.use('/opslevel', await opslevel(opslevelEnv));
+backend.add(import('@backstage/plugin-proxy-backend'));
+backend.add(legacyPlugin('opslevel', import('./plugins/opslevel')));
 ```
 
 ### Step 4

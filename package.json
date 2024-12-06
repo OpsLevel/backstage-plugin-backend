@@ -61,6 +61,9 @@
     "supertest": "^7.0.0",
     "yalc": "^1.0.0-pre.53"
   },
+  "resolutions": {
+    "jsonpath-plus": "^10.1.0"
+  },
   "files": [
     "dist",
     "/migrations/*"
