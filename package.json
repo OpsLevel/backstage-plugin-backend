@@ -17,7 +17,7 @@
   },
   "backstage": {
     "role": "backend-plugin",
-    "pluginId": "@opslevel/backstage-maturity-backend",
+    "pluginId": "backstage-maturity-backend",
     "pluginPackages": [
       "@opslevel/backstage-maturity-backend"
     ]

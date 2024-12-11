@@ -1,1 +1,1 @@
-export * from './service/OpsLevelBuilder';
+export { opsLevelBackstageMaturityBackendPlugin as default } from './service/OpsLevelBuilder';
