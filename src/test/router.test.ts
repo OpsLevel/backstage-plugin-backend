@@ -1,4 +1,3 @@
-import { getVoidLogger } from '@backstage/backend-common';
 import express from 'express';
 import request from 'supertest';
 import { createRouter } from '../service/router';
@@ -15,11 +14,8 @@ describe('createRouter', () => {
       setAutoSyncConfiguration: jest.fn(),
       getAutoSyncExecutions: jest.fn(),
     };
-    const identity: any = { getIdentity: async () => { return null; } }
     const router = await createRouter({
-      logger: getVoidLogger(),
       controller: (controller as OpsLevelController),
-      identity: identity,
     });
     app = express().use(router);
   });

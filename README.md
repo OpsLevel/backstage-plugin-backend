@@ -12,50 +12,20 @@ export functionality of users, groups, and components from Backstage into OpsLev
 In the root directory of your Backstage installation, run the following command:
 
 ```bash
-yarn add --cwd packages/backend @opslevel/backstage-maturity-backend
+yarn add --cwd packages/backend @opslevel/backstage-maturity-backend @backstage/plugin-proxy-backend
 ```
 
 ### Step 2
 
-Create a file called `opslevel.ts` in the `packages/backend/src/plugins` subdirectory of your Backstage installation and insert the following contents:
+Open the `index.ts` file in the `packages/backend/src` subdirectory of your Backstage installation with the code editor of your choice.
 
 ```ts
-import { Router } from 'express';
-import { PluginEnvironment } from '../types';
-import { OpsLevelBuilder } from '@opslevel/backstage-maturity-backend';
-
-export default async function createPlugin(
-  env: PluginEnvironment,
-): Promise<Router> {
-  const builder = await OpsLevelBuilder.create(env);
-  const router = await builder.build();
-
-  return router;
-}
+// packages/backend/src/index.ts
+backend.add(import('@backstage/plugin-proxy-backend'));
+backend.add(import('@opslevel/backstage-maturity-backend'));
 ```
 
 ### Step 3
-
-Open the `index.ts` file in the `packages/backend/src` subdirectory of your Backstage installation with the code editor of your choice.
-
-#### Step 3.1
-
-Add the following line after the end of the existing import statements:
-
-```ts
-import { legacyPlugin } from '@backstage/backend-common';
-```
-
-#### Step 3.2
-
-Add the following statement to the cluster of similar statements near the top of the `main()` function:
-
-```ts
-backend.add(import('@backstage/plugin-proxy-backend'));
-backend.add(legacyPlugin('opslevel', import('./plugins/opslevel')));
-```
-
-### Step 4
 
 Set up the necessary configuration in your Backstage instance's `app-config.yaml`. Note: that this configuration is the same as for installing the installing the [frontend plugin](https://github.com/OpsLevel/backstage-plugin), if you've already done the changes in `app-config.yaml` for the frontend plugin, you don't need to do this again.
 

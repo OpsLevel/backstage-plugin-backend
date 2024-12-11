@@ -1,60 +1,56 @@
 import { createRouter } from "./router";
-import { Logger } from 'winston';
-import { PluginDatabaseManager, PluginEndpointDiscovery } from '@backstage/backend-common';
-import { PluginTaskScheduler } from '@backstage/backend-tasks';
 import { applyDatabaseMigrations } from "../database/migrations";
 import { OpsLevelDatabase } from "../database/OpsLevelDatabase";
 import { OpsLevelController } from "./OpsLevelController";
 import { CatalogClient } from "@backstage/catalog-client";
-import { IdentityApi } from '@backstage/plugin-auth-node';
-import { Config } from "@backstage/config";
+import {
+  coreServices,
+  createBackendPlugin,
+} from '@backstage/backend-plugin-api';
 
-
-export type OpsLevelEnvironment = {
-  logger: Logger;
-  database: PluginDatabaseManager;
-  scheduler: PluginTaskScheduler;
-  discovery: PluginEndpointDiscovery;
-  identity: IdentityApi;
-  config: Config;
-};
-
-
-export class OpsLevelBuilder {
-  private readonly env: OpsLevelEnvironment;
-  private opsLevelDatabase: OpsLevelDatabase | null;
-  private opsLevelController: OpsLevelController | null;
-
-  static create(env: OpsLevelEnvironment) {
-    return new OpsLevelBuilder(env);
-  }
-
-  private constructor(env: OpsLevelEnvironment) {
-    this.env = env;
-    this.opsLevelDatabase = null;
-    this.opsLevelController = null;
-  }
-
-  async build() {
-    const { database, logger, scheduler, identity, discovery, config } = this.env;
-    const catalog = new CatalogClient({ discoveryApi: discovery });
+export const opsLevelBackstageMaturityBackendPlugin = createBackendPlugin({
+  pluginId: 'backstage-maturity-backend',
+  register(env) {
+    env.registerInit({
+      deps: {
+        logger: coreServices.logger,
+        config: coreServices.rootConfig,
+        scheduler: coreServices.scheduler,
+        database: coreServices.database,
+        discovery: coreServices.discovery,
+        rootHttpRouter: coreServices.rootHttpRouter,
+      },
+      async init({ 
+        config,
+        logger, 
+        discovery, rootHttpRouter, database,scheduler 
+      }) {
+        const catalog = new CatalogClient({ discoveryApi: discovery });
+        logger.debug('Catalog client created');
     
-    const dbClient = await database.getClient();
+        const dbClient = await database.getClient();
+        logger.debug('DB client created');
 
-    logger.info(scheduler);
+        if (!database.migrations?.skip) {
+          logger.info('Performing database migration(s)');
+          await applyDatabaseMigrations(dbClient);
+        }
+        logger.debug('DB migration check finished');
 
-    if (!database.migrations?.skip) {
-      logger.info('Performing database migration(s)');
-      await applyDatabaseMigrations(dbClient);
-    }
+        const opsLevelDatabase = new OpsLevelDatabase(dbClient, logger);
+        logger.debug('DB created');
+        const opsLevelController = new OpsLevelController(opsLevelDatabase, logger, scheduler, catalog, config);
 
-    this.opsLevelDatabase = new OpsLevelDatabase(dbClient, logger);
-    this.opsLevelController = new OpsLevelController(this.opsLevelDatabase, logger, scheduler, catalog, config);
+        opsLevelController.scheduleAutoSyncIfApplicable();
+        logger.debug('Auto-sync task scheduling completed');
 
-    this.opsLevelController.scheduleAutoSyncIfApplicable();
+        const router = await createRouter({ controller: opsLevelController});
 
-    const router = await createRouter({ logger: logger, controller: this.opsLevelController, identity: identity });
+        logger.debug('Created router');
 
-    return router;
-  }
-}
+        rootHttpRouter.use('/api/opslevel', router);
+        logger.debug('Registered router');
+      },
+    });
+  },
+});
