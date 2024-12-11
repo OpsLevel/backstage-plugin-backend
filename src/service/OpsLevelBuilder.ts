@@ -48,7 +48,7 @@ export const opsLevelBackstageMaturityBackendPlugin = createBackendPlugin({
 
         logger.debug('Created router');
 
-        rootHttpRouter.use('/api/opslevelt pull', router);
+        rootHttpRouter.use('/api/opslevel', router);
         logger.debug('Registered router');
       },
     });
