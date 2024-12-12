@@ -1,7 +1,6 @@
-import { Logger } from "winston";
+import { LoggerService, SchedulerService } from "@backstage/backend-plugin-api";
 import { OpsLevelDatabase } from "../database/OpsLevelDatabase";
 import { AutoSyncConfiguration } from "../types";
-import { PluginTaskScheduler } from "@backstage/backend-tasks";
 import { CatalogApi } from '@backstage/catalog-client';
 import { ExportEntityResponse, OpsLevelGraphqlAPI } from "./OpsLevelGraphqlAPI";
 import { Config } from "@backstage/config";
@@ -69,13 +68,13 @@ class RunRecordHandler {
 
 export class OpsLevelController {
   private db: OpsLevelDatabase;
-  private logger: Logger;
-  private scheduler: PluginTaskScheduler;
+  private logger: LoggerService;
+  private scheduler: SchedulerService;
   private running_task_abort_controller: AbortController | undefined;
   private catalog: CatalogApi;
   private opsLevel: OpsLevelGraphqlAPI;
 
-  public constructor(db: OpsLevelDatabase, logger: Logger, scheduler: PluginTaskScheduler, catalog: CatalogApi, config: Config, opsLevelApi: OpsLevelGraphqlAPI | null = null) {
+  public constructor(db: OpsLevelDatabase, logger: LoggerService, scheduler: SchedulerService, catalog: CatalogApi, config: Config, opsLevelApi: OpsLevelGraphqlAPI | null = null) {
     this.db = db;
     this.logger = logger;
     this.scheduler = scheduler;
@@ -137,7 +136,7 @@ export class OpsLevelController {
       }
       await recordHandler.setState("completed");
     } catch (e) {
-      this.logger.error(e);
+      this.logger.error(`${e}`);
       await recordHandler.message(`Error: ${e instanceof Error ? e.message : e}`);
       await recordHandler.message("Export task failed")
       await recordHandler.setState("failed");

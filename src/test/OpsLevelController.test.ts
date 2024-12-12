@@ -1,6 +1,5 @@
-import { getVoidLogger } from '@backstage/backend-common';
-import { PluginTaskScheduler } from "@backstage/backend-tasks";
 import { OpsLevelController } from '../service/OpsLevelController';
+import { mockServices} from '@backstage/backend-test-utils';
 import { OpsLevelDatabase } from '../database/OpsLevelDatabase';
 
 describe('OpsLevelController', () => {
@@ -32,8 +31,8 @@ describe('OpsLevelController', () => {
     }
     controller = new OpsLevelController(
       (db as OpsLevelDatabase),
-      getVoidLogger(),
-      (scheduler as PluginTaskScheduler),
+      mockServices.logger.mock(),
+      scheduler,
       catalog,
       config,
       opsLevelApi

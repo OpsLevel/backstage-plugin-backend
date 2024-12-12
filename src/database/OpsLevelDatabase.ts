@@ -1,12 +1,12 @@
-import { Logger } from "winston";
+import { LoggerService } from "@backstage/backend-plugin-api";
 import { OpslevelConfigRow, OpslevelExportRun } from "./tables";
 import { Knex } from "knex";
 
 export class OpsLevelDatabase {
   private database: Knex;
-  private logger: Logger;
+  private logger: LoggerService;
 
-  public constructor(database: Knex, logger: Logger) {
+  public constructor(database: Knex, logger: LoggerService) {
     this.database = database;
     this.logger = logger;
   }
