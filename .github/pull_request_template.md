@@ -16,4 +16,4 @@
 
 <details>
 <summary>Collapsed Screenshots</summary>
-</details
+</details>

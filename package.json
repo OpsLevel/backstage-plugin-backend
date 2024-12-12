@@ -60,7 +60,8 @@
     "yalc": "^1.0.0-pre.53"
   },
   "resolutions": {
-    "jsonpath-plus": "^10.1.0"
+    "jsonpath-plus": "^10.1.0",
+    "fast-xml-parser": "^4.2.5"
   },
   "files": [
     "dist",
