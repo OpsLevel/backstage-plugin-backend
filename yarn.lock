@@ -7322,9 +7322,9 @@ cron-parser@^4.2.0:
     luxon "^3.2.1"
 
 cron@*, cron@^3.0.0, cron@^3.1.6:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/cron/-/cron-3.3.2.tgz#d98843f1db6d4cfcf3a4cb028fbc71231c5261f1"
-  integrity sha512-7o2PH9vKRd4PxB8c2GsHRozfHYT+gIhZG0DI+vzGOdWo42mofO/ooYnyU0CCh27aKzCrUKMAwAwi7xJ84xKSug==
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/cron/-/cron-3.4.0.tgz#f1bf0b5662b19df216607f52fb59b2cd7ed1b5ff"
+  integrity sha512-YqLYLxAGFyxNF94wIqRFo5szUmEKgWXOoGa/5lwjKVvOXiipbDUyDtWR6XuYkHXou4pjbepgb3mij5YMfEOWcw==
   dependencies:
     "@types/luxon" "~3.4.0"
     luxon "~3.5.0"
