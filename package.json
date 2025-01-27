@@ -45,7 +45,7 @@
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "knex": "^3.0.1",
-    "limiter": "^2.1.0",
+    "limiter": "^3.0.0",
     "node-fetch": "^3.3.1",
     "winston": "^3.11.0",
     "yn": "^5.0.0"
