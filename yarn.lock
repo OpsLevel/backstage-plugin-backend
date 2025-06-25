@@ -6384,6 +6384,14 @@ better-sqlite3@^11.0.0:
     bindings "^1.5.0"
     prebuild-install "^7.1.1"
 
+better-sqlite3@^12.1.1:
+  version "12.1.1"
+  resolved "https://registry.yarnpkg.com/better-sqlite3/-/better-sqlite3-12.1.1.tgz#a317fb6586fe3739b49629e6134103e3dbb73cce"
+  integrity sha512-xjl/TjWLy/6yLa5wkbQSjTgIgSiaEJy3XzjF5TAdiWaAsu/v0OCkYOc6tos+PkM/k4qURN2pFKTsbcG3gk29Uw==
+  dependencies:
+    bindings "^1.5.0"
+    prebuild-install "^7.1.1"
+
 bfj@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/bfj/-/bfj-8.0.0.tgz#d15931bd5ef1ef5c874a59e6ef00653de8416568"
