@@ -54,7 +54,7 @@
     "@backstage/backend-test-utils": "^1.1.0",
     "@backstage/cli": "^0.29.2",
     "@types/supertest": "^6.0.2",
-    "better-sqlite3": "^11.0.0",
+    "better-sqlite3": "^12.4.6",
     "changie": "^1.16.0",
     "supertest": "^7.0.0",
     "yalc": "^1.0.0-pre.53"
