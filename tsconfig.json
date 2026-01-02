@@ -1,10 +1,13 @@
 {
   "extends": "@backstage/cli/config/tsconfig.json",
   "include": [
-    "src"
+    "src",
+    "migrations"
   ],
   "compilerOptions": {
     "outDir": "dist-types",
-    "rootDir": "."
+    "rootDir": ".",
+    "allowJs": true,
+    "checkJs": false
   }
 }
