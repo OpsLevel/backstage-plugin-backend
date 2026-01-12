@@ -53,10 +53,15 @@
   "devDependencies": {
     "@backstage/backend-test-utils": "^1.1.0",
     "@backstage/cli": "^0.29.2",
+    "@types/better-sqlite3": "^7.6.0",
+    "@types/node": "^20.0.0",
     "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "better-sqlite3": "^11.0.0",
     "changie": "^1.16.0",
     "supertest": "^7.0.0",
+    "typescript": "^5.0.0",
     "yalc": "^1.0.0-pre.53"
   },
   "resolutions": {
